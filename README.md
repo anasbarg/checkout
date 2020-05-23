@@ -12,5 +12,13 @@
 | C | 20 | |
 | D | 15 | |
    
+   
+   
+| #Item  | #Unit | #Price |
+| ------------- | ------------- |------------- |
+| A  | 50  | Special Price 3 for 130  |
+| B  | 30 | 2 for 45 |
+| B  | 20 | None |
+| B  | 15 | None |
 
 <p>Our checkout accepts items in any order, so that if we scan a B, an A, and another B, we’ll recognise the two B’s and price them at 45 (for a total price so far of 95). Because the pricing changes frequently, we need to be able to pass in a set of pricing rules each time we start handling a checkout transaction.</p>
