@@ -18,6 +18,7 @@ object Checkout extends App {
   }
 
   def calculateCostForDiscountedItem(numberOfItems: Int, individualCost: Int, offers: Option[Offer]): Int = {
+    val withoutAnyDiscounts = numberOfItems * individualCost
 
     val withDiscount = for {
     batchPrice <- offers.map(offer => offer.batchPrice)
@@ -30,7 +31,7 @@ object Checkout extends App {
 
     withDiscount match {
       case Some(value) => value
-      case None => numberOfItems * individualCost
+      case None => withoutAnyDiscounts
     }
   }
 
@@ -38,10 +39,10 @@ object Checkout extends App {
     val ItemsWithOccurances: Map[Char, Int] = calculateNumberOfOccurances(basket)
 
     val a = for {
-//    priceForA <- products.map(product => calculateCostForDiscountedItem(ItemsWithOccurances('A'), product.unitPrice, product.offer))
-//    priceForB <- products.map(product => calculateCostForDiscountedItem(ItemsWithOccurances('B'), product.unitPrice, product.offer))
+    priceForA <- products.map(product => calculateCostForDiscountedItem(ItemsWithOccurances('A'), product.unitPrice, product.offer))
+    priceForB <- products.map(product => calculateCostForDiscountedItem(ItemsWithOccurances('B'), product.unitPrice, product.offer))
     priceForC <- products.map(product => calculateCostForDiscountedItem(ItemsWithOccurances('C'), product.unitPrice, product.offer))
-    } yield priceForC
+    } yield priceForB
 
     println(a)
 
